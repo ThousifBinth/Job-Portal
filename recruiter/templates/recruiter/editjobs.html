@@ -1,0 +1,58 @@
+{% extends 'recruiter/dashboard.html' %}
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <h2>Edit Job Details</h2>
+            <form method="POST">
+                {% csrf_token %}
+
+                <!-- Display any error messages -->
+                {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                    <li class="message">{{ message }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+
+
+
+
+                <div class="form-group">
+                    <label for="name">Job Name</label>
+                    <input type="text" name="name" id="name" class="form-control" value="{{ job.name }}" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea name="description" id="description" class="form-control"
+                        required>{{ job.description }}</textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="place">Location</label>
+                    <input type="text" name="place" id="place" class="form-control" value="{{ job.place }}" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="salary_range">Salary Range</label>
+                    <input type="text" name="salary_range" id="salary_range" class="form-control"
+                        value="{{ job.salary_range }}" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="last_date_to_apply">Last Date to Apply</label>
+                    <input type="date" name="last_date_to_apply" id="last_date_to_apply" class="form-control"
+                        value="{{ job.last_date_to_apply }}" required>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Update Job</button>
+            </form>
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+
+
+    {% endblock %}

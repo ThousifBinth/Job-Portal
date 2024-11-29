@@ -1,0 +1,403 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>jobportal</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet">
+    <style>
+        body {
+            overflow-x: hidden;
+        }
+
+        .logobg {
+
+            background: url("{% static 'images/bg1.png' %}");
+
+        }
+        .butnz{
+            height: 60px;
+            background-color: #DFDBD6;
+        }
+
+        .butnz1{
+            text-align: start;
+        }
+        .head-btn3 {
+            position: relative; /* Position relative to allow ::before positioning */
+            padding: 10px 20px;
+            border: 2px solid #988156; /* Border color */
+            background-color: #bab6b6; /* Initial background color */
+            color: #000; /* Initial text color */
+            font-size: 16px;
+            font-weight: bold;
+            text-transform: uppercase;
+            cursor: pointer;
+            overflow: hidden; /* Hide the ::before element when it's not visible */
+            transition: color 0.4s ease, border-color 0.4s ease; /* Transition for text color and border */
+        }
+ 
+        /* The ::before pseudo-element to create the background fill effect */
+        .head-btn3::before {
+            content: 'Log Out'; /* Required to create the element */
+            position: absolute;
+            top: 0;
+            left: 0;
+            font-size: 16px;
+            font-weight: bold;
+            padding-top: 10px;
+            width: 100%; /* Full width of the button */
+            height: 100%; /* Full height of the button */
+            background-color: #988156; /* Fill color */
+            transform: scaleX(0); /* Start with the element hidden */
+            transform-origin: left; /* Animate from left to right */
+            transition: transform 0.4s ease; /* Smooth transition */
+            z-index: 1; 
+    /* Ensure the background is behind the text */
+         }
+        .head-btn3:hover {
+            color: white; /* Change text color to white */
+            border-color: #988156; /* Change border color */
+        }
+
+  /* On hover, expand the ::before element from left to right */
+        .head-btn3:hover::before {
+            transform: scaleX(1); /* Animate the background to fill */
+        }
+
+
+
+        .mt1 {
+            height: 25px;
+        }
+
+        .nav {
+            background-color: #988156;
+        }
+
+        .nav-pills .nav-link {
+            background-color: #988156;
+            /* Light gray background for unselected links */
+            color: #fff;
+            /* Text color */
+        }
+
+        /* Change background color of active nav link */
+        .nav-pills .nav-link.active {
+            background-color: #695735;
+            /* Blue background for active link */
+            color: white;
+            /* Text color for active link */
+        }
+
+
+        /* Change background color on hover */
+        .nav-pills .nav-link:hover {
+            background-color: #b69f74;
+            /* Darker blue on hover */
+            color: white;
+            /* Text color on hover */
+        }
+
+        .regform {
+            background-color: rgb(201, 180, 154);
+        }
+        .sbmtbtn{
+            width: 200px;
+            height: 30px;
+            background-color: #988156;
+            margin: 30px;
+        }
+        .sbmtbtn:hover{
+            cursor: pointer;
+            background-color: #11050582;
+            color: #fff;
+        }
+
+        .sticky-top{
+            position: relative;
+            top: 10px;
+        }
+        
+
+        .footer {
+            background-color: #11050582;
+        }
+
+        .footer h2,
+        .footer p {
+            margin: 30px;
+        }
+
+        .smedia {
+            text-align: center;
+        }
+
+        .smedia .fa-brands {
+            font-size: 20px;
+            color: rebeccapurple;
+            margin-bottom: 30px;
+        }
+    </style>
+
+<body>
+    <div class="container-fluid logo">
+        <div class="row logobg">
+            <div class="col-md-4"></div>
+            <div class="col-md-4 ">
+                <img src="{% static 'images/logo1.png' %}" class="img-fluid">
+            </div>
+            <div class="col-md-4"></div>
+        </div>
+
+        <div class="row butnz">
+            <div class="col-md-12 butnz1">
+              <a href=" {% url 'aspirant:logout' %}" class="btn head-btn3" id="reg">Log Out</a>
+            </div>
+            
+
+    </div>
+    <div class="row mt1"></div>
+    <div class="row nav">
+        <div class="col-12">
+            <ul class="nav nav-pills nav-fill">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'aspirant:home' %}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'aspirant:dashboard' %}">Find jobs</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Contact</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'recruiter:login' %}">Recruiter</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="row mt1"></div>
+    {% block content %}
+
+
+
+    <div class="container-fluid regform" style="background-color: #E1B68F;">
+
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4 m-1" style="border: 2px solid black; border-radius: 10px;">
+
+                <!-- Display success or error messages -->
+                {% if messages %}
+                <ul>
+                    {% for message in messages %}
+                    <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+
+                <!-- Job Profile Form -->
+                <form method="POST" enctype="multipart/form-data" style="margin: 30px;">
+                    {% csrf_token %}
+
+                    <!-- Personal Information -->
+                    <h3>Personal Information</h3>
+                    <label for="first_name">First Name:</label><br>
+                    <input type="text" id="first_name" name="first_name" required><br>
+
+                    <label for="last_name">Last Name:</label><br>
+                    <input type="text" id="last_name" name="last_name"><br>
+
+                    <label for="date_of_birth">Date of Birth:</label><br>
+                    <input type="date" id="date_of_birth" name="date_of_birth"><br>
+
+                    <label for="gender">Gender:</label><br>
+                    <select id="gender" name="gender">
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
+                    </select><br>
+
+                    <label for="nationality">Nationality:</label><br>
+                    <input type="text" id="nationality" name="nationality"><br>
+
+                    <label for="languages_spoken">Languages Spoken:</label><br>
+                    <textarea id="languages_spoken" name="languages_spoken"></textarea><br>
+
+                    <label for="email">Email Address:</label><br>
+                    <input type="email" id="email" name="email" required><br>
+
+                    <label for="phone_number">Phone Number:</label><br>
+                    <input type="text" id="phone_number" name="phone_number" required><br>
+
+                    <label for="address">Address:</label><br>
+                    <textarea id="address" name="address"></textarea><br>
+
+                    <label for="city">City:</label><br>
+                    <input type="text" id="city" name="city"><br>
+
+                    <label for="postal_code">Postal Code:</label><br>
+                    <input type="text" id="postal_code" name="postal_code"><br>
+
+                    <!-- Job Preferences -->
+                    <h3>Job Preferences</h3>
+                    <label for="desired_job_title">Desired Job Title:</label><br>
+                    <input type="text" id="desired_job_title" name="desired_job_title" required><br>
+
+                    <label for="job_category">Job Category:</label><br>
+                    <input type="text" id="job_category" name="job_category"><br>
+
+                    <label for="location_preference">Location Preference:</label><br>
+                    <input type="text" id="location_preference" name="location_preference"><br>
+
+                    <label for="years_of_experience">Years of Experience:</label><br>
+                    <input type="number" id="years_of_experience" name="years_of_experience"><br>
+
+                    <label for="highest_education_level">Highest Education Level:</label><br>
+                    <input type="text" id="highest_education_level" name="highest_education_level"><br>
+
+                    <label for="field_of_study">Field of Study:</label><br>
+                    <input type="text" id="field_of_study" name="field_of_study"><br>
+
+                    <label for="certifications">Certifications:</label><br>
+                    <textarea id="certifications" name="certifications"></textarea><br>
+
+                    <!-- File Uploads -->
+                    <label for="resume">Upload Resume:</label><br>
+                    <input type="file" id="resume" name="resume"><br>
+
+                    <label for="cover_letter">Upload Cover Letter:</label><br>
+                    <input type="file" id="cover_letter" name="cover_letter"><br>
+
+                    <!-- Employment Preferences -->
+                    <h3>Employment Preferences</h3>
+                    <label for="employment_type">Employment Type:</label><br>
+                    <select id="employment_type" name="employment_type">
+                        <option value="Full-time">Full-time</option>
+                        <option value="Part-time">Part-time</option>
+                        <option value="Freelance">Freelance</option>
+                    </select><br>
+
+                    <label for="salary_expectation">Salary Expectation:</label><br>
+                    <input type="number" id="salary_expectation" name="salary_expectation" step="0.01"><br>
+
+                    <label for="work_availability">Work Availability:</label><br>
+                    <input type="text" id="work_availability" name="work_availability"><br>
+
+                    <label for="preferred_working_hours">Preferred Working Hours:</label><br>
+                    <input type="text" id="preferred_working_hours" name="preferred_working_hours"><br>
+
+                    <label for="willing_to_relocate">Willing to Relocate:</label>
+                    <input type="checkbox" id="willing_to_relocate" name="willing_to_relocate"><br>
+
+                    <label for="terms_and_conditions">I agree to the terms and conditions:</label>
+                    <input type="checkbox" id="terms_and_conditions" name="terms_and_conditions" required><br>
+
+                    <button type="submit" class="sbmtbtn">Submit</button>
+                </form>
+
+            </div>
+
+            <div class="col-md-4"></div>
+        </div>
+    </div>
+
+    <div class="row mt1"></div>
+
+
+
+
+
+
+
+
+    {% endblock %}
+
+
+    <div class="row footer">
+        <div class="col-md-3">
+            <h2>ABOUT US</h2>
+            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit, adipisci!</p>
+        </div>
+        <div class="col-md-3">
+            <h2>CONTACT INFO</h2>
+            <p>cyz street, <br>abc line, <br>city, <br>zipcode <br>phone:111122222 <br> mail:cc@hotmail.com </p>
+        </div>
+        <div class="col-md-3">
+            <h2>IMPORTANT LINKS</h2>
+            <p>home <br>about <br>find jobs <br>recruiter </p>
+        </div>
+        <div class="col-md-3">
+            <h2>Sign Up for Email </h2>
+            <form action="">
+                <p style="color: #ffffff;"><br>
+                    Get the recent jobs in your inbox!!
+                </p>
+                <input type="email" name="" id="" placeholder="enter your email">
+                <input type="button" value="subscribe">
+
+            </form>
+        </div>
+        <hr style="margin: 50px 0px; color: #000; height: 2px;">
+        <div class="row updates">
+            <div class="col-md-3">
+                <h4 style="margin-left: 20px;">27k+ placed</h4>
+            </div>
+            <div class="col-md-3">
+                <h4 style="margin-left: 20px;">180+ companies</h4>
+            </div>
+            <div class="col-md-3">
+                <h4 style="margin-left: 20px;">1lakh+ vacancies</h4>
+            </div>
+            <div class="col-md-3">
+                <h4 style="margin-left: 20px;">and a lot of success stories</h4>
+            </div>
+        </div>
+
+
+        <hr style="margin: 50px 0px; color: #000; height: 2px;">
+
+        <div class="row">
+            <div class="col-12 smedia">
+                <i class="fa-brands fa-pinterest"></i> &nbsp <i class="fa-brands fa-facebook"></i> &nbsp
+                <i class="fa-brands fa-square-instagram"></i> &nbsp<i class="fa-brands fa-square-snapchat"></i>&nbsp
+                <i class="fa-brands fa-youtube"></i>&nbsp<i class="fa-brands fa-twitter"></i>
+            </div>
+        </div>
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+
+
+<script src="{% static 'scripts/validation.js' %}"></script>
+<script src="{% static 'scripts/active.js' %}"></script>
+
+
+
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>

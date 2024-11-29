@@ -1,0 +1,330 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>jobportal</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet">
+    <style>
+        body {
+            overflow-x: hidden;
+        }
+
+        .logobg {
+
+            background: url("{% static 'images/bg1.png' %}");
+
+        }
+
+        .butnz {
+            height: 60px;
+            background-color: #DFDBD6;
+        }
+
+        .butnz1 {
+            text-align: start;
+        }
+
+        .head-btn3 {
+            position: relative;
+            /* Position relative to allow ::before positioning */
+            padding: 10px 20px;
+            border: 2px solid #988156;
+            /* Border color */
+            background-color: #bab6b6;
+            /* Initial background color */
+            color: #000;
+            /* Initial text color */
+            font-size: 16px;
+            font-weight: bold;
+            text-transform: uppercase;
+            cursor: pointer;
+            overflow: hidden;
+            /* Hide the ::before element when it's not visible */
+            transition: color 0.4s ease, border-color 0.4s ease;
+            /* Transition for text color and border */
+        }
+
+        /* The ::before pseudo-element to create the background fill effect */
+        .head-btn3::before {
+            content: 'Log Out';
+            /* Required to create the element */
+            position: absolute;
+            top: 0;
+            left: 0;
+            font-size: 16px;
+            font-weight: bold;
+            padding-top: 10px;
+            width: 100%;
+            /* Full width of the button */
+            height: 100%;
+            /* Full height of the button */
+            background-color: #988156;
+            /* Fill color */
+            transform: scaleX(0);
+            /* Start with the element hidden */
+            transform-origin: left;
+            /* Animate from left to right */
+            transition: transform 0.4s ease;
+            /* Smooth transition */
+            z-index: 1;
+            /* Ensure the background is behind the text */
+        }
+
+        .head-btn3:hover {
+            color: white;
+            /* Change text color to white */
+            border-color: #988156;
+            /* Change border color */
+        }
+
+        /* On hover, expand the ::before element from left to right */
+        .head-btn3:hover::before {
+            transform: scaleX(1);
+            /* Animate the background to fill */
+        }
+
+
+
+        .mt1 {
+            height: 25px;
+        }
+
+        .nav {
+            background-color: #988156;
+        }
+
+        .nav-pills .nav-link {
+            background-color: #988156;
+            /* Light gray background for unselected links */
+            color: #fff;
+            /* Text color */
+        }
+
+        /* Change background color of active nav link */
+        .nav-pills .nav-link.active {
+            background-color: #695735;
+            /* Blue background for active link */
+            color: white;
+            /* Text color for active link */
+        }
+
+
+        /* Change background color on hover */
+        .nav-pills .nav-link:hover {
+            background-color: #b69f74;
+            /* Darker blue on hover */
+            color: white;
+            /* Text color on hover */
+        }
+
+        .regform {
+            background-color: rgb(201, 180, 154);
+        }
+
+        .sbmtbtn {
+            width: 200px;
+            height: 30px;
+            background-color: #988156;
+            margin: 30px;
+        }
+
+        .sbmtbtn:hover {
+            cursor: pointer;
+            background-color: #11050582;
+            color: #fff;
+        }
+
+        .sticky-top {
+            position: relative;
+            top: 10px;
+        }
+
+
+        .footer {
+            background-color: #11050582;
+        }
+
+        .footer h2,
+        .footer p {
+            margin: 30px;
+        }
+
+        .smedia {
+            text-align: center;
+        }
+
+        .smedia .fa-brands {
+            font-size: 20px;
+            color: rebeccapurple;
+            margin-bottom: 30px;
+        }
+    </style>
+
+<body>
+    <div class="container-fluid logo">
+        <div class="row logobg">
+            <div class="col-md-4"></div>
+            <div class="col-md-4 ">
+                <img src="{% static 'images/logo1.png' %}" class="img-fluid">
+            </div>
+            <div class="col-md-4"></div>
+        </div>
+
+
+
+
+
+        <!-- <div class="row mt1"></div>
+    <div class="row nav">
+        <div class="col-12">
+            <ul class="nav nav-pills nav-fill">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{% url 'aspirant:home' %}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'recruiter:dashboard' %}">Jobs</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Contact</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'recruiter:manageapplications' %}">Applications</a>
+                </li>
+            </ul>
+        </div>
+    </div> -->
+        <div class="row mt1"></div>
+
+
+
+        
+        <div class="container-fluid">
+            <div class="row register">
+                <div class="col-md-4"></div>
+                <div class="col-md-4 text-center">
+                    <form class="login-form" method="post">
+                        {% csrf_token %}
+                        <h2 class="text-center" style="margin-top: 120px;">Login</h2>
+                        <br>
+                        <div class="mb-3">
+                            <label for="username" class="form-label" style="font-size: 16px;">Username</label>
+                            <input type="text" class="form-control" id="username" placeholder="Enter Username"
+                                name="name" required>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label for="email">Email address</label>
+                            <input type="email" class="form-control" id="email" placeholder="Enter email" name="email"
+                                required>
+                        </div>
+                        <br>
+
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" class="form-control" id="password" placeholder="Password"
+                                name="password" required>
+                        </div>
+
+                        <br>
+                        <button type="submit" class="btn btn-primary btn-block mb-3">Login</button>
+
+
+
+                        <div class="text-center mb-3">
+                            <a href="#">Forgot Password?</a>
+                        </div>
+                    </form>
+
+                </div>
+                <div class="col-md-4"></div>
+
+
+            </div>
+        </div>
+
+        
+
+
+
+
+        <div class="row footer">
+            <div class="col-md-3">
+                <h2>ABOUT US</h2>
+                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit, adipisci!</p>
+            </div>
+            <div class="col-md-3">
+                <h2>CONTACT INFO</h2>
+                <p>cyz street, <br>abc line, <br>city, <br>zipcode <br>phone:111122222 <br> mail:cc@hotmail.com </p>
+            </div>
+            <div class="col-md-3">
+                <h2>IMPORTANT LINKS</h2>
+                <p>home <br>about <br>find jobs <br>recruiter </p>
+            </div>
+            <div class="col-md-3">
+                <h2>Sign Up for Email </h2>
+                <form action="">
+                    <p style="color: #ffffff;"><br>
+                        Get the recent jobs in your inbox!!
+                    </p>
+                    <input type="email" name="" id="" placeholder="enter your email">
+                    <input type="button" value="subscribe">
+
+                </form>
+            </div>
+            <hr style="margin: 50px 0px; color: #000; height: 2px;">
+            <div class="row updates">
+                <div class="col-md-3">
+                    <h4 style="margin-left: 20px;">27k+ placed</h4>
+                </div>
+                <div class="col-md-3">
+                    <h4 style="margin-left: 20px;">180+ companies</h4>
+                </div>
+                <div class="col-md-3">
+                    <h4 style="margin-left: 20px;">1lakh+ vacancies</h4>
+                </div>
+                <div class="col-md-3">
+                    <h4 style="margin-left: 20px;">and a lot of success stories</h4>
+                </div>
+            </div>
+
+
+            <hr style="margin: 50px 0px; color: #000; height: 2px;">
+
+            <div class="row">
+                <div class="col-12 smedia">
+                    <i class="fa-brands fa-pinterest"></i> &nbsp <i class="fa-brands fa-facebook"></i> &nbsp
+                    <i class="fa-brands fa-square-instagram"></i> &nbsp<i class="fa-brands fa-square-snapchat"></i>&nbsp
+                    <i class="fa-brands fa-youtube"></i>&nbsp<i class="fa-brands fa-twitter"></i>
+                </div>
+            </div>
+
+
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
+</body>

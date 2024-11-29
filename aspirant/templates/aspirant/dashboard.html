@@ -1,0 +1,85 @@
+{% extends 'aspirant/register.html' %}
+{% load static %}
+{% block content %}
+
+
+
+
+
+<div class="container-fluid dash">
+    <div class="row">
+        <div class="col-12">
+            <nav class="navbar navbar-expand-lg bg-body-tertiary">
+                <div class="container-fluid">
+
+                    <a class="navbar-brand" href="#"></a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            
+
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="fa-solid fa-user"></i>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="{% url 'aspirant:profile' %}">Account</a></li>
+                                    <li><a href="{% url 'aspirant:editprofile' %}" class="dropdown-item">Edit
+                                            Profile</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'aspirant:appliedjobs' %}">Applied
+                                            Jobs</a></li>
+
+                                </ul>
+                            </li>
+
+                        </ul>
+                        <form class="d-flex" role="search" action="{% url 'aspirant:search' %}" method="get">
+                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="keyword">
+                            <button class="btn btn-outline-success" type="submit">Search</button>
+                        </form>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+
+    <div class="row dashboard">
+        <div class="col-12" style="letter-spacing: 3px; ">
+            <h1 style="color: rgb(43, 59, 43); font-style: italic;">Explore new opportunities tailored just for you.
+            </h1>
+            <br>{% if username %}
+            <h1>Welcome, {{ username }} {{ profile.last_name }}!</h1>
+            {% endif %}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="container">
+                <h1 style="color: rgb(43, 59, 43); font-style: italic; margin-bottom: 40px;">Here is the list of jobs waiting for you..</h1>
+                {% for i in jobs %}
+                <h5>{{ i.name }}</h5>
+                <p>{{ i.place }}</p>
+                <a href="{% url 'aspirant:jobdetail' i.id %}" class="btn btn-primary">View Job</a>
+
+
+
+
+                {% endfor %}
+            </div>
+
+
+
+        </div>
+        <div class="col-md-6"></div>
+    </div>
+    <div class="row mt1"></div>
+
+
+</div>
+
+
+{% endblock %}

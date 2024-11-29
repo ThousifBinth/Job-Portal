@@ -1,0 +1,15 @@
+
+{% extends 'aspirant/register.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row register" style="text-align: center;">
+        <h2>Congratulations! You have successfully signed up.</h2>
+  <p>Now, please complete your profile.</p>
+  <a href="{% url 'aspirant:login' %}" class="btn btn-primary">Log In Now</a>
+    </div>
+</div>
+<div class="row mt1"></div>
+
+{% endblock %}

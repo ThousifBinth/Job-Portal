@@ -1,0 +1,155 @@
+{% extends 'aspirant/register.html' %}
+{% load static %}
+{% block content %}
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <nav class="navbar navbar-expand-lg bg-body-tertiary">
+                <div class="container-fluid">
+
+                    <div class="collapse navbar-collapse" id="navbarScroll">
+                        <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll"
+                            style="--bs-scroll-height: 100px;">
+                            
+
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+                                    <i class="fa-solid fa-user"></i>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="{% url 'aspirant:profile' %}">Account</a></li>
+                                    <li><a href="{% url 'aspirant:editprofile' %}" class="dropdown-item">Edit Profile</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'aspirant:appliedjobs' %}">Applied Jobs</a></li>
+
+                                </ul>
+                            </li>
+
+                        </ul>
+                        <form class="d-flex" role="search" action="{% url 'aspirant:search' %}" method="get">
+                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="keyword">
+                            <button class="btn btn-outline-success" type="submit">Search</button>
+                        </form>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+    <h1>Edit Profile</h1>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        
+        <!-- First Name -->
+        <label for="first_name">First Name:</label>
+        <input type="text" id="first_name" name="first_name" value="{{ profile.first_name }}" class="form-control">
+        
+        <!-- Last Name -->
+        <label for="last_name">Last Name:</label>
+        <input type="text" id="last_name" name="last_name" value="{{ profile.last_name }}" class="form-control">
+        
+        <!-- Email -->
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" value="{{ profile.email }}" class="form-control">
+        
+        <!-- Phone Number -->
+        <label for="phone_number">Phone Number:</label>
+        <input type="text" id="phone_number" name="phone_number" value="{{ profile.phone_number }}" class="form-control">
+        
+        <!-- Address -->
+        <label for="address">Address:</label>
+        <input type="text" id="address" name="address" value="{{ profile.address }}" class="form-control">
+        
+        <!-- City -->
+        <label for="city">City:</label>
+        <input type="text" id="city" name="city" value="{{ profile.city }}" class="form-control">
+        
+        <!-- Postal Code -->
+        <label for="postal_code">Postal Code:</label>
+        <input type="text" id="postal_code" name="postal_code" value="{{ profile.postal_code }}" class="form-control">
+        
+        <!-- Desired Job Title -->
+        <label for="desired_job_title">Desired Job Title:</label>
+        <input type="text" id="desired_job_title" name="desired_job_title" value="{{ profile.desired_job_title }}" class="form-control">
+        
+        <!-- Job Category -->
+        <label for="job_category">Job Category:</label>
+        <input type="text" id="job_category" name="job_category" value="{{ profile.job_category }}" class="form-control">
+        
+        <!-- Location Preference -->
+        <label for="location_preference">Location Preference:</label>
+        <input type="text" id="location_preference" name="location_preference" value="{{ profile.location_preference }}" class="form-control">
+        
+        <!-- Years of Experience -->
+        <label for="years_of_experience">Years of Experience:</label>
+        <input type="text" id="years_of_experience" name="years_of_experience" value="{{ profile.years_of_experience }}" class="form-control">
+        
+        <!-- Highest Education Level -->
+        <label for="highest_education_level">Highest Education Level:</label>
+        <input type="text" id="highest_education_level" name="highest_education_level" value="{{ profile.highest_education_level }}" class="form-control">
+        
+        <!-- Field of Study -->
+        <label for="field_of_study">Field of Study:</label>
+        <input type="text" id="field_of_study" name="field_of_study" value="{{ profile.field_of_study }}" class="form-control">
+        
+        <!-- Certifications -->
+        <label for="certifications">Certifications:</label>
+        <input type="text" id="certifications" name="certifications" value="{{ profile.certifications }}" class="form-control">
+        
+        <!-- Resume -->
+        <label for="resume">Resume:</label>
+        <input type="file" id="resume" name="resume" class="form-control">
+        {% if profile.resume %}
+            <a href="{{ profile.resume.url }}" target="_blank">View Current Resume</a>
+        {% endif %}
+        
+        <!-- Cover Letter -->
+        <label for="cover_letter">Cover Letter:</label>
+        <input type="file" id="cover_letter" name="cover_letter" class="form-control">
+        {% if profile.cover_letter %}
+            <a href="{{ profile.cover_letter.url }}" target="_blank">View Current Cover Letter</a>
+        {% endif %}
+        
+        <!-- Employment Type -->
+        <label for="employment_type">Employment Type:</label>
+        <input type="text" id="employment_type" name="employment_type" value="{{ profile.employment_type }}" class="form-control">
+        
+        <!-- Salary Expectation -->
+        <label for="salary_expectation">Salary Expectation:</label>
+        <input type="text" id="salary_expectation" name="salary_expectation" value="{{ profile.salary_expectation }}" class="form-control">
+        
+        <!-- Work Availability -->
+        <label for="work_availability">Work Availability:</label>
+        <input type="text" id="work_availability" name="work_availability" value="{{ profile.work_availability }}" class="form-control">
+        
+        <!-- Preferred Working Hours -->
+        <label for="preferred_working_hours">Preferred Working Hours:</label>
+        <input type="text" id="preferred_working_hours" name="preferred_working_hours" value="{{ profile.preferred_working_hours }}" class="form-control">
+        
+        <!-- Willing to Relocate -->
+        <label for="willing_to_relocate">Willing to Relocate:</label>
+        <input type="checkbox" id="willing_to_relocate" name="willing_to_relocate" {% if profile.willing_to_relocate %}checked{% endif %} class="form-control">
+        
+        <!-- Terms and Conditions -->
+        <label for="terms_and_conditions">Accept Terms and Conditions:</label>
+        <input type="checkbox" id="terms_and_conditions" name="terms_and_conditions" {% if profile.terms_and_conditions %}checked{% endif %} class="form-control">
+        
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+    </form>
+    <br>
+    <a href="{% url 'aspirant:profile' %}" class="btn btn-secondary">Back to Profile</a>
+</div>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+

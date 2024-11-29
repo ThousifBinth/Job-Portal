@@ -1,0 +1,62 @@
+{% extends 'aspirant/register.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container-fluid dash">
+    <div class="row">
+        <div class="col-12">
+            <nav class="navbar navbar-expand-lg bg-body-tertiary">
+                <div class="container-fluid">
+
+                    <div class="collapse navbar-collapse" id="navbarScroll">
+                        <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll"
+                            style="--bs-scroll-height: 100px;">
+                            
+
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+                                    <i class="fa-solid fa-user"></i>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="{% url 'aspirant:profile' %}">Account</a></li>
+                                    <li><a href="{% url 'aspirant:editprofile' %}" class="dropdown-item">Edit Profile</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'aspirant:appliedjobs' %}">Applied Jobs</a></li>
+
+                                </ul>
+                            </li>
+
+                        </ul>
+                        <form class="d-flex" role="search" action="{% url 'aspirant:search' %}" method="get">
+                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="keyword">
+                            <button class="btn btn-outline-success" type="submit">Search</button>
+                        </form>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+
+<div class="row">
+
+<div class="col-md-6">
+    <h1>{{ job.name }}</h1>
+    <p>{{ job.description }}</p>
+    <p>Location: {{ job.place }}</p>
+    <p>Salary Range: {{ job.salary_range }}</p>
+    <p>Last Date to Apply: {{ job.last_date_to_apply }}</p>
+
+    {% if has_applied %}
+    <button disabled>Already Applied</button>
+    {% else %}
+    <form method="post" action="{% url 'aspirant:apply_for_job' job.id %}">
+        {% csrf_token %}
+        <button type="submit" class="btn">Apply Now</button>
+    </form>
+    {% endif %}
+</div>
+
+<div class="col-md-6"></div>
+
+</div>
+{% endblock %}

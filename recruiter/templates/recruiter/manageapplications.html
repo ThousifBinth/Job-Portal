@@ -1,0 +1,71 @@
+{% extends 'recruiter/dashboard.html' %}
+{% block content %}
+
+<div class="container">
+    <h1>Manage Job Applications</h1>
+
+    {% if applications %}
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Aspirant Name</th>
+                    <th>Resume</th>
+                    <th>Applied Job</th>
+                    <th>Job Details</th>
+                    <th>Accept</th>
+                    <th>Reject</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for application in applications %}
+                    <tr>
+                        <td>{{ application.aspirant.name }}</td>
+                        <td>
+                            {% if application.aspirant.profile.resume %}
+                                <a href="{{ application.aspirant.profile.resume.url }}" target="_blank">Download Resume</a>
+                            {% else %}
+                                No resume uploaded
+                            {% endif %}
+                        </td>
+                        <td>{{ application.job.name }}</td>
+                        <td><a href="{% url 'recruiter:dashboard' %}" class="btn btn-info">Job Details</a></td>
+                        <td>
+                            {% if application.status == 'Pending' %}
+                                <form method="POST" action="{% url 'recruiter:accept_application' application.id %}">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-success">Accept</button>
+                                </form>
+                            {% elif application.status == 'Accepted' %}
+                                <!-- If Accepted, show "Accepted" and disable button -->
+                                <button class="btn btn-success" disabled>Accepted</button>
+                            {% else %}
+                                <!-- If application is rejected, keep Accept button disabled -->
+                                <button class="btn btn-success" disabled>Accept</button>
+                            {% endif %}
+                        </td>
+
+                        <!-- Reject Button: Show only if status is PENDING -->
+                        <td>
+                            {% if application.status == 'Pending' %}
+                                <form method="POST" action="{% url 'recruiter:reject_application' application.id %}">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-danger">Reject</button>
+                                </form>
+                            {% elif application.status == 'Rejected' %}
+                                <!-- If Rejected, show "Rejected" and disable button -->
+                                <button class="btn btn-danger" disabled>Rejected</button>
+                            {% else %}
+                                <!-- If application is accepted, show Reject button disabled -->
+                                <button class="btn btn-danger" disabled>Reject</button>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No pending applications at the moment.</p>
+    {% endif %}
+</div>
+
+{% endblock %}
