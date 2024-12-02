@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-zaidb^it@afp74nsrg0ooi21a6m+b1l-82v0sk-@x(fci$^p2s
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -47,6 +47,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -78,7 +79,7 @@ WSGI_APPLICATION = 'jobsite.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
-
+'''
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -89,6 +90,11 @@ DATABASES = {
         'PORT': '5432',
     }
 }
+'''
+import dj_database_url
+
+DATABASES = {
+    'default': dj_database_url.parse('postgresql://jobportal_d22t_user:7W2enm06pAMrMVbvepn8hydWAmu0Zcr5@dpg-ct6l51popnds73dh4bng-a.oregon-postgres.render.com/jobportal_d22t')}
 
 
 # Password validation
@@ -130,6 +136,9 @@ STATICFILES_DIRS=[
     os.path.join(BASE_DIR,'aspirant/static'),
     os.path.join(BASE_DIR,'recruiter/static')
 ]
+STATIC_ROOT = BASE_DIR / "staticfiles"
+STATICFILES_STORAGE =  "whitenoise.storage.CompressedManifestStaticFilesStorage"
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
